@@ -25,6 +25,9 @@ function RenderCampsite(props) {
 
     const view = React.createRef();
 
+
+    const recognizeComment = ({dx}) => (dx > 20) ? true : false;
+    
     const recognizeDrag = ({dx}) => (dx < -200) ? true : false;
 
     const panResponder = PanResponder.create({
@@ -54,6 +57,10 @@ function RenderCampsite(props) {
                     ],
                     { cancelable: false }
                 );
+
+            } else if (recognizeComment(gestureState)){
+                console.log("they dragged left to right by 200 pixels")
+                props.onShowModal();
             }
             return true;
         }
